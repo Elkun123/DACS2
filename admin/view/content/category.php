@@ -1,11 +1,12 @@
 <?php
-    $qlkh = new QlkhController($conn);
-    $select_result = $qlkh->showData('category');
+    $cate = new CategoryController($conn);
+    $select_result = $cate->showData('category');
+    $cate->deleleData();
 ?>
 
 <button class="btn btn-success btn_add">
     <i class="icon fa-solid fa-plus"></i>
-    Thêm
+    <a href="main.php?ql=cate_add">Thêm</a>
 </button>
 
 <table class="table table-hover">
@@ -30,11 +31,11 @@
                   </button></td>
                   <td><button class='btn btn-warning'>
                     <i class='icon fa-solid fa-screwdriver-wrench'></i>
-                    <a href=''>Sửa</a>
+                    <a href='main.php?ql=cate_update&id_sua=".$row['I_id_category']."'>Sửa</a>
                   </button></td>
                   <td><button class='btn btn-danger'>
                     <i class='icon fa-solid fa-trash-can'></i>
-                    <a href=''>Xóa</a>
+                    <a href='main.php?ql=cate_delete&id_xoa=".$row['I_id_category']."'>Xóa</a>
                   </button></td>";
             echo "</tr>";
         }

@@ -12,6 +12,15 @@
             case 'cate':
                 include('../view/content/category.php');
                 break;
+            case 'cate_add':
+                include('../view/content/category_add.php');
+                break;
+            case 'cate_update':
+                include('../view/content/category_update.php');
+                break;
+            case 'cate_delete':
+                include('../view/content/category.php');
+                break;
             case 'pw':
                 include('../view/content/warehouse.php');
                 break;

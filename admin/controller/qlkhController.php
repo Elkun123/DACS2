@@ -11,5 +11,14 @@
         public function showData($name_table){
             return $this->qlkh->selectData($name_table);
         }
+
+        public function insert($name_table, $data) {
+            return $this->qlkh->insertData($name_table, $data);
+        }
+
+        public function delete($name_table, $condition)
+        {
+            return $this->qlkh->deleteData($name_table, $condition);
+        }
     }
 ?>

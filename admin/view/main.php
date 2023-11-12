@@ -2,6 +2,7 @@
     session_start();
     include ('../../database/connect.php');
     include ('../controller/qlkhController.php');
+    include ('../controller/categoryController.php');
 
     if(isset($_SESSION['userName'])){
         $userName = $_GET('userName');
