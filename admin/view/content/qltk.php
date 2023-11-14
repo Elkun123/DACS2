@@ -1,12 +1,10 @@
 <?php
     $qlkh = new QlkhController($conn);
-    $select_result = $qlkh->showData('user_infor');
+    $select_result = $qlkh->showData('users');
+
+    $qlkh->deleteData();
 ?>
 
-<button class="btn btn-success btn_add">
-    <i class="icon fa-solid fa-plus"></i>
-    Thêm
-</button>
 
 <table class="table table-hover">
     <tr class="tr_first">
@@ -22,7 +20,7 @@
     <?php
         while($row = mysqli_fetch_array($select_result)){
             echo "<tr>";
-            echo "<td>".$row['I_id_user_infor']."</td>
+            echo "<td>".$row['I_id_user']."</td>
                   <td>".$row['T_name']."</td>
                   <td>".$row['T_number_phone']."</td>
                   <td>".$row['T_email']."</td>
@@ -30,11 +28,11 @@
                   <td>".$row['D_day_of_birth']."</td>
                   <td><button class='btn btn-warning'>
                     <i class='icon fa-solid fa-screwdriver-wrench'></i>
-                    <a href=''>Sửa</a>
+                    <a href='main.php?ql=qltk_update&id_sua=".$row['I_id_user']."'>Sửa</a>
                   </button></td>
                   <td><button class='btn btn-danger'>
                     <i class='icon fa-solid fa-trash-can'></i>
-                    <a href=''>Xóa</a>
+                    <a href='main.php?ql=qltk_delete&id_xoa=".$row['I_id_user']."'>Xóa</a>
                   </button></td>";
             echo "</tr>";
         }

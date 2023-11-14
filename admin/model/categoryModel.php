@@ -28,7 +28,7 @@
 
 
         public function updateData($name, $mota, $iddm, $id_sua) {
-            $sql = "UPDATE category SET T_name_category = '$name', T_description = '$mota', T_id_parent = '$iddm' WHERE I_id_category = $id_sua ";
+            $sql = "UPDATE category SET T_name_category = '$name', T_description = '$mota', I_id_parent = '$iddm' WHERE I_id_category = $id_sua ";
             $result = mysqli_query($this->conn, $sql);
             return $result;
         }
