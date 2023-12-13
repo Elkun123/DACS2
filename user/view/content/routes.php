@@ -15,6 +15,9 @@
             case 'cart':
                 include('user/view/content/cart.php');
                 break;
+            case 'payment':
+                include('user/view/content/payment.php');
+                break;
             }
     }else{
         include('user/view/content/home.php');

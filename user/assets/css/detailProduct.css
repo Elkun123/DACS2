@@ -2,11 +2,19 @@ body{
   background: #eee;
 }
 
+::placeholder {
+  color: #888; /* Màu xám hoặc bất kỳ màu nào bạn muốn */
+}
+
 .product {
   padding: 2rem 3rem;
   display: flex;
   gap: 5rem;
   background: #eee;
+}
+
+.product .show-pro{
+  align-items: start;
 }
 
 .product .column {
@@ -26,7 +34,6 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 65rem;
 }
 
 .column1 .main-image {
@@ -147,6 +154,7 @@ body{
 
 .column2 .price h1{
   font-size: 3rem;
+  display: inline-block;
 }
 
 .column2 .price span{
@@ -154,6 +162,69 @@ body{
   font-size: 1.4rem;
   border-radius: .8rem;
   background-color: #f0f0f6;
+}
+
+.column2 .type h5{
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.column2 .box-type{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.column2 .box-type .sub-box-type{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  background: var(--white);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 2px #ccc;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--black);
+}
+
+.column2 .sub-box-type .img-select{
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  top: -0.1rem;
+  right: -0.6rem;
+  display: none;
+}
+
+.column2 .sub-box-type .img-select.selected,
+.column2 .sub-box-type:hover > .img-select{
+  display: block;
+}
+
+.column2 .box-type .img-sample{
+  width: 5rem;
+}
+
+.column2 .box-type .name-type{
+  font-size: 1.5rem;
+}
+
+.column2 .box-type .border-type{
+  position: absolute;
+  inset: -1px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 0;
+  transition: all .001s linear;
+}
+
+.column2 .box-type .border-type.selected,
+.column2 .sub-box-type:hover > .border-type{
+  border: 2px solid var(--orange);
 }
 
 .column2 .details{
@@ -263,6 +334,13 @@ body{
   box-shadow: 0 0 3px var(--orange);
 }
 
+.column3 .counter span{
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #999;
+  padding: 0 1rem;
+}
+
 .column3 .sub-total{
   font-size: 1.6rem;
   margin: 0;
@@ -287,6 +365,14 @@ body{
 .column3 .btn_buy:hover{
   background-color: #fed295;
   font-weight: 600;
+  color: var(--black);
+}
+
+.btn_buy{
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  color: var(--black);
 }
 
 .comment{
@@ -368,11 +454,11 @@ body{
 }
 
 /* Individual bars */
-.wrap .box .overview .bar-5 { border-radius: 4rem; width: 60%; height: 18px; background-color: #04AA6D;}
-.wrap .box .overview .bar-4 { border-radius: 4rem; width: 30%; height: 18px; background-color: #2196F3;}
-.wrap .box .overview .bar-3 { border-radius: 4rem; width: 10%; height: 18px; background-color: #00bcd4;}
-.wrap .box .overview .bar-2 { border-radius: 4rem; width: 4%; height: 18px; background-color: #ff9800;}
-.wrap .box .overview .bar-1 { border-radius: 4rem; width: 15%; height: 18px; background-color: #f44336;}
+.wrap .box .overview .bar-5 { border-radius: 4rem; height: 18px; background-color: #04AA6D;}
+.wrap .box .overview .bar-4 { border-radius: 4rem; height: 18px; background-color: #2196F3;}
+.wrap .box .overview .bar-3 { border-radius: 4rem; height: 18px; background-color: #00bcd4;}
+.wrap .box .overview .bar-2 { border-radius: 4rem; height: 18px; background-color: #ff9800;}
+.wrap .box .overview .bar-1 { border-radius: 4rem; height: 18px; background-color: #f44336;}
 /* Mở rộng, thu gọn trang */
 
 .cutoff-text{
@@ -424,12 +510,13 @@ body{
 }
 
 .user{
-  width: 52.8rem;
+  width: 20%;
   padding: 1rem;
 }
 
 .user .heading{
   display: flex;
+  align-items: center;
 }
 
 .user .heading .logo{
@@ -444,8 +531,9 @@ body{
 }
 
 .user .heading .name{
-  padding-left: 0.8rem;
+  padding-left: 1.2rem;
   font-size: 1.6rem;
+  text-align: left;
 }
 
 .user .heading .name h1{
@@ -453,6 +541,8 @@ body{
   font-weight: 500;
   font-size: 1.5rem;
   line-height: 2.4rem;
+  padding: 0;
+  margin: 0;
 }
 
 .user .heading .name span{
@@ -477,6 +567,7 @@ body{
 }
 
 .react{
+  width: 80%;
   padding: 2rem;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -505,6 +596,16 @@ body{
   line-height: 1.6;
 }
 
+.react p .likes,
+.react p .comments{
+  cursor: pointer;
+  margin: 0 0.4rem;
+}
+
+.react p .icon{
+  margin-right:0.4rem;
+}
+
 .react .img-container{
   padding: .5rem 0;
 }
@@ -514,7 +615,7 @@ body{
   border-radius: 1.8rem;
 }
 
-.react span{
+.react .types{
   display: inline-block;
   font-size: 1.3rem;
   color: #aaa;
@@ -522,7 +623,7 @@ body{
 }
 
 .react .contact{
-  padding: .7rem;
+  padding: .7rem 0;
   display: flex;
   justify-content: space-between;
 }
@@ -531,6 +632,52 @@ body{
   font-size: 1.5rem;
   color: #000;
   font-weight: 400;
+}
+
+.comment-box{
+  position: relative;
+  display: none;
+}
+
+.comment-box .text-comment{
+    border: 1px solid rgb(238, 238, 238);
+    padding: 1rem 5rem 1rem 2rem;
+    border-radius: 8px;
+    width: 100%;
+    outline: 0px;
+    font-size: 1.4rem;
+    height: 4rem;
+    resize: none;
+    overflow: hidden;
+}
+
+.comment-box .btn-submit{
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  border: none;
+  background: none;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 2rem;
+}
+
+.comment-box .sub-react .btn-submit{
+  top: 4rem;
+  right: 1rem;
+}
+
+.comment-box .btn-submit .icon-submit{
+  color: #ccc;
+}
+
+.comment-box .text-comment:focus{
+  border: 1px solid var(--orange);
+}
+
+.comment-box .text-comment:focus:valid + .btn-submit .icon-submit {
+  color: var(--orange);
 }
 
 .sub-react{
@@ -561,22 +708,51 @@ body{
 .sub-react .heading h4 span{
   color: #aaa;
   font-size: 1.4rem;
+  margin-left: 0.3rem;
 }
 
 .sub-react p{
   padding: 0 3.4rem;
 }
 
+.sub-react:not(:first-child) {
+  display: none;
+}
+
 .react h3{
   font-size: 1.6rem;
   font-weight: 500;
-  color: #2196F3;
+  color: var(--orange);
+  cursor: pointer;
 }
 
 .react h3 i{
   padding: 0.5rem;
 }
 
+.page-number{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  font-size: 1.5rem;
+  color: var(--orange);
+}
+
+.page-number span{
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.page-number span:hover{
+  box-shadow: 0 0 2px var(--orange);
+}
+
+.page-number .page{
+  font-size: 1.7rem;
+  font-weight: 600;
+  cursor: default;
+}
 /* Mở rộng, thu gọn trang */
 
 .cutoff-text{
@@ -655,7 +831,7 @@ body{
 
 @media (max-width: 1029px) {
   .react{
-    width: 50vw;
+    width: 80%;
   }
 }
 

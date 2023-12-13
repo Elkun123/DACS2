@@ -3,21 +3,39 @@
 
     $idCart = $cartController->getIdCart($_SESSION['username']);
     $idsps = $cartController->getIdsps($_SESSION['username']);
+    $idtsps = $cartController->getIdtsps($_SESSION['username']);
     $qtys = $cartController->getQtys($_SESSION['username']);
 
     if(isset($_GET['count'])){
         $counts = $_GET['count'];
 
-        if (!is_array($counts)) {
-            $counts = array($counts);
+        if(!isset($_SESSION['username'])){
+            header("location:user/view/content/signin.php");
         }
 
-        $msg = $cartController->updateCart($idCart,$idsps,$counts);
-        header("location:index.php?route=cart&&msg_add_cart=$msg");
+        if(!is_array($counts)) {
+            $counts = array($counts);
+        }
+        
+        if(isset($_GET['idsp'])){
+            $idsps = array($_GET['idsp']);
+        }
+
+        if(isset($_GET['idtsp'])){
+            $idtsps = array($_GET['idtsp']);
+        }
+
+        if(isset($_GET['signDetail'])){
+            $sign = $_GET['signDetail'];
+        }else{
+            $sign = "false";
+        }
+        $msg = $cartController->updateCart($idCart,$idsps,$counts,$sign,$idtsps);
+        // header("location:index.php?route=cart&&msg_add_cart=$msg");
     }
 
     if(isset($_POST['delete'])){
-        $cartController->deleteCart($_POST['idcart'],$_POST['idsp']);
+        $cartController->deleteCart($_POST['idcart'],$_POST['idsp'],$_POST['idtsp']);
     }
 
     if(isset($_GET['msg_add_cart'])){
@@ -60,7 +78,7 @@
 
                 <div class="show_items">
                     <?php
-                        $cartController->selectData($idsps,$qtys,$idCart);
+                        $cartController->selectData($idsps,$qtys,$idCart,$idtsps);
                     ?>    
                 </div>       
             </div>
@@ -82,5 +100,6 @@
             </div>
         </div>
     </form>
+    <script src="user/assets/script/cart.js"></script>
 </body>
 </html>

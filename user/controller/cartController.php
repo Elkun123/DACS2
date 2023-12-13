@@ -26,17 +26,16 @@
         }
 
         public function selectData($idsps,$qtys,$idCart){
+            $result = $this->cart_sign->selectData($idCart);
             $count = 0;
-            $result = $this->cart_sign->selectData($idsps);
             if($result){
                 while($row_result = mysqli_fetch_array($result)){
-                    $link_imgs = explode(",", $row_result['T_img_sample_pro']);
                     echo '
-                        <div class="row show_item" data-idcart="'.$idCart.'" data-idsp="'.$row_result['I_id_pro'].'">
+                        <div class="row show_item" data-idcart="'.$idCart.'" data-idsp="'.$row_result['I_id_pro'].'" data-idtsp="'.$row_result['I_id_type_pro'].'">
                             <div class="col-5 show_pro">
                                 <input type="checkbox" name="check" id="child_check" data-price="'.$row_result['I_price']*$qtys[$count].'">
-                                <img src="'.$link_imgs[0].'" alt="ảnh sản phẩm">
-                                <h5 class="name_product">'.$row_result['T_name_pro'].'</h5>
+                                <img src="'.$row_result['T_image_sample_type_pro'].'" alt="ảnh sản phẩm">
+                                <h5 class="name_product">'.$row_result['T_name_pro'].' - '.$row_result['T_name'].'</h5>
                             </div>
                             <div class="col-2 price_cart">
                                 <span class="test">'.$row_result['I_price'].'</span>
@@ -69,7 +68,9 @@
             $total_cart = $this->cart_sign->selectCount($username);
             $idsps = array();
             while($row = mysqli_fetch_array($total_cart)){
-                $idsps[] = $row['I_id_pro'];
+                if(!in_array($row['I_id_pro'],$idsps)){
+                    $idsps[] = $row['I_id_pro'];
+                }
             }
             return $idsps;
         }
@@ -83,8 +84,17 @@
             return $qtys;
         }
 
-        public function updateCart($idCart,$idsps,$counts){
-            $result = $this->cart_sign->updateCart($idCart,$idsps,$counts);
+        public function getIdtsps($username){
+            $total_cart = $this->cart_sign->selectCount($username);
+            $idtsps = array();
+            while($row = mysqli_fetch_array($total_cart)){
+                $idtsps[] = $row['I_id_type_pro'];
+            }
+            return $idtsps;
+        }
+
+        public function updateCart($idCart,$idsps,$counts,$sign,$idtsps){
+            $result = $this->cart_sign->updateCart($idCart,$idsps,$counts,$sign,$idtsps);
             if($result){
                 return $msg = "success_cart";
             }else{
@@ -92,8 +102,8 @@
             }
         }
 
-        public function deleteCart($idCart,$idsp){
-            return $this->cart_sign->deleteCart($idCart,$idsp);
+        public function deleteCart($idCart,$idsp,$idtsp){
+            return $this->cart_sign->deleteCart($idCart,$idsp,$idtsp);
         }
     }
 ?>

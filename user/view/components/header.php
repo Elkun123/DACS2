@@ -12,8 +12,8 @@
 
    <nav class="navbar">
       <a href="">home</a>
-      <a href="index.php?route=detailProduct">about</a>
-      <a href="">menu</a>
+      <a href="">about</a>
+      <a href="index.php?route=payment">menu</a>
       <a href="index.php?route=product">products</a>
       <a href="">contact</a>
       <a href="">blogs</a>

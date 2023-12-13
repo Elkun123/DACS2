@@ -67,7 +67,7 @@
             if(!empty($iddm)){
                 $check = $this->products_sign->select_sub_category($iddm);
                 $count = 0;
-                while($row_A  = mysqli_fetch_array($check)){
+                while($row = mysqli_fetch_array($check)){
                     $count++;
                 }
             }else{
@@ -75,7 +75,7 @@
             }
             $result = $this->products_sign->select($iddm,$start,$limit,$count);
             while($row = mysqli_fetch_array($result)){
-                $link_imgs = explode(",", $row['T_img_sample_pro']);
+                $link_imgs = explode("|", $row['T_img_sample_pro']);
                 echo '
                     <div class="col-lg-3 col-md-4 col-6 item">
                         <a href="index.php?route=detailProduct&&idsp='.$row['I_id_pro'].'">
@@ -119,8 +119,8 @@
         public function newSelect(){
             $result = $this->products_sign->newSelect();
             while($row = mysqli_fetch_array($result)){
-                $link_imgs = explode(",", $row['T_img_sample_pro']);
-                echo '
+                $link_imgs = explode("|", $row['T_img_sample_pro']);
+                echo ' 
                     <div class="box">
                         <a href="#">
                             <img src="'.$link_imgs[0].'" alt="PRODUCT">
