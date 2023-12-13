@@ -6,8 +6,8 @@
             $this->conn = $conn;
         }
 
-        public function selectData($name_table){
-            $sql = "SELECT * FROM $name_table";
+        public function selectData(){
+            $sql = "SELECT * FROM users";
             $result = mysqli_query($this->conn, $sql);
             return $result;
         }
@@ -18,11 +18,10 @@
             return $result;
         }
 
-        public function updateData($name, $phone, $email, $address, $birth, $type, $id_sua){
-            $sql = "UPDATE users SET T_name='$name', T_number_phone='$phone', T_email='$email', T_address='$address', D_day_of_birth='$birth', B_type='$type'
+        public function updateData($name, $phone, $email, $address, $birth, $id_sua){
+            $sql = "UPDATE users SET T_name='$name', T_number_phone='$phone', T_email='$email', T_address='$address', D_day_of_birth='$birth'
                     WHERE I_id_user=$id_sua";
             $result = mysqli_query($this->conn, $sql);
-            return $result;
         }
 
         public function deleteData($id_xoa){

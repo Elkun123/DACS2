@@ -3,6 +3,8 @@
     include ('../../database/connect.php');
     include ('../controller/qlkhController.php');
     include ('../controller/categoryController.php');
+    include ('../controller/productController.php');
+    include ('../controller/orderController.php');
 
     if(isset($_SESSION['userName'])){
         $userName = $_GET('userName');
@@ -24,6 +26,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -51,7 +54,7 @@
                     <i class="icon fa-solid fa-user"></i>
                     Tài khoản người dùng
                 </a></li>
-                <li><a href="main.php?ql=cate" id="category">
+                <li><a href="main.php?ql=cate_pr" id="category">
                     <i class="icon fa-solid fa-bars-progress"></i>
                     Danh mục
                 </a></li>
@@ -61,13 +64,9 @@
                         Sản phẩm
                     </a>
                     <ul class="sub_menu">
-                        <li><a href="main.php?ql=pw" id="productWarehouse">
+                        <li><a href="main.php?ql=pro" id="productWarehouse">
                             <i class="icon fa-solid fa-warehouse"></i>
                             Kho sản phẩm
-                        </a></li>
-                        <li><a href="main.php?ql=cart" id="cart">
-                            <i class="icon fa-solid fa-cart-shopping"></i>
-                            Giỏ hàng
                         </a></li>
                         <li><a href="main.php?ql=order" id="order">
                             <i class="icon fa-solid fa-file-lines"></i>
@@ -85,7 +84,7 @@
         <div class="content">
             <?php
                 include ('../controller/transitionController.php');
-            ?>            
+            ?>     
         </div>
     </main>
 
