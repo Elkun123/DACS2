@@ -98,14 +98,5 @@ try {
       subCategory.classList.add("show");
     }
   }); 
-
-  const priceElements = document.querySelectorAll(".price");
-  for(var priceElement of priceElements ){
-    var priceText = priceElement.textContent;
-    var price = parseInt(priceText, 10);
-    var fommatPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    priceElement.textContent = fommatPrice + "đ";
-  }
-  
 } catch (error) {
 }

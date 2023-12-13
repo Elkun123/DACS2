@@ -126,9 +126,7 @@ CREATE TABLE product_type (
     I_qty_in_stock INT,
     I_price INT,
     FOREIGN KEY (I_id_pro) REFERENCES product(I_id_pro)
-);
-insert into product_type(I_id_pro, T_name, T_image_sample_type_pro)
-values 
+); 
 
 CREATE TABLE cart_pro (
     I_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -159,7 +157,8 @@ CREATE TABLE orders (
     T_address VARCHAR(100),
     T_email VARCHAR(100),
     T_order_date datetime,
-    I_status INT
+    I_status INT,
+    FOREIGN KEY (I_idUser) REFERENCES users(I_id_user)
 );
 
 CREATE TABLE order_detail (
