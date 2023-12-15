@@ -21,7 +21,6 @@ border-radius: 8px;
 .container form .row{
 display: flex;
 flex-wrap: wrap;
-align-items: center;
 }
 
 .container form .row .col{
@@ -109,12 +108,25 @@ td img{
     width: 100%;
 }
 
+td span.info-name-pro{
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 3.5rem;
+}
+
 td:last-child{
 text-align: right;
 }
 
 tr{
 border-bottom: 1px solid #aaa;
+}
+
+tr.row-info-pro{
+    align-items: center;
 }
 
 tr:last-child{

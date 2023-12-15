@@ -31,6 +31,7 @@
             $sign = "false";
         }
         $msg = $cartController->updateCart($idCart,$idsps,$counts,$sign,$idtsps);
+        echo $msg;
         // header("location:index.php?route=cart&&msg_add_cart=$msg");
     }
 
@@ -93,7 +94,7 @@
                     <span class="total_price">100000Đ</span>
                 </div>
 
-                <button type="submit" class="btn_buy"><i class="fa-solid fa-receipt"></i> Mua Hàng</button>
+                <a href="#" type="submit" class="btn_buy"><i class="fa-solid fa-receipt"></i> Mua Hàng</a>
                 <button type="submit" class="btn_update_cart">
                     <i class="fa-solid fa-pen-to-square"></i> Cập nhật giỏ hàng
                 </button>

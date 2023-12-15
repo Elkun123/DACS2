@@ -18,7 +18,7 @@
                         echo'
                             <li>
                                 <a class="parent_category">
-                                    <img src="public/img_detail'.$row['T_img_sample_category'].'" alt="ảnh minh họa">
+                                    <img src="public/img_detail/'.$row['T_img_sample_category'].'" alt="ảnh minh họa">
                                     '.$row['T_name_category'].'
                                 </a>
                                 <ul class="sub_category">
@@ -26,7 +26,7 @@
                         while($sub_row = mysqli_fetch_array($sub_result)){
                             echo'
                                 <li><a href="index.php?route=product&&iddm='.$sub_row['I_id_category'].'">
-                                    <img src="public/img_detail'.$sub_row['T_img_sample_category'].'" alt="ảnh minh họa">
+                                    <img src="public/img_detail/'.$sub_row['T_img_sample_category'].'" alt="ảnh minh họa">
                                     '.$sub_row['T_name_category'].'
                                 </a></li>
                             ';
@@ -54,7 +54,7 @@
             while($row = mysqli_fetch_array($result)){
                 echo '
                     <a href="index.php?route=product&&iddm='.$row['I_id_category'].'" class="icons">
-                        <img src="public/img_detail'.$row['T_img_sample_category'].'" alt="ảnh minh họa">
+                        <img src="public/img_detail/'.$row['T_img_sample_category'].'" alt="ảnh minh họa">
                         <div class="info">
                         <h3>'.$row['T_name_category'].'</h3>
                         </div>
@@ -79,7 +79,7 @@
                 echo '
                     <div class="col-lg-3 col-md-4 col-6 item">
                         <a href="index.php?route=detailProduct&&idsp='.$row['I_id_pro'].'">
-                            <img src="public/img_detail'.$link_imgs[0].'" alt="ảnh sản phẩm">
+                            <img src="public/img_detail/'.$link_imgs[0].'" alt="ảnh sản phẩm">
                             <h3 class="name-product">'.$row['T_name_pro'].'</h3>
                             <div class="review-sold">
                                 <div class="review">
@@ -122,7 +122,7 @@
                 echo ' 
                     <div class="box">
                         <a href="#">
-                            <img src="public/img_detail'.$link_imgs[0].'" alt="PRODUCT">
+                            <img src="public/img_detail/'.$link_imgs[0].'" alt="PRODUCT">
                             <h3>'.$row['T_name_pro'].'</h3>
                             <div class="sold">'.$row['I_sold'].' sold</div>
                         </a>

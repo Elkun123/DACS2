@@ -4,12 +4,11 @@
 
     $paymentController = new PaymentController($conn);
 
-    if($_GET){
+    if($_GET && !isset($_GET['submit'])){
         $iduser = $_GET['iduser'];
-        $counts = $_GET['count'];
-        $idsps = $_GET['idsp'];
-        $idtsps = $_GET['idtsp'];
-        print_r($idtsps);
+        $counts = explode(',',$_GET['count']);
+        $idsps = explode(',',$_GET['idsp']);
+        $idtsps = explode(',',$_GET['idtsp']);
         if(!is_array($counts)) {
             $counts = array($counts);
         }
@@ -21,6 +20,26 @@
         if(!is_array($idtsps)) {
             $idtsps = array($idtsps);
         }
+    }
+
+    if(isset($_GET['submit'])){
+        $iduser = $_GET['iduser'];
+        parse_str($_GET['idsps'], $idsps);
+        parse_str($_GET['idtsps'], $idtsps);
+        parse_str($_GET['counts'], $counts);
+        $ship = $_GET['ship'];
+        $payment = $_GET['payment'];
+        $name = $_GET['name'];
+        $numberPhone = $_GET['numberPhone'];
+        $email = $_GET['email'];
+        $address = "";
+        if(isset($_GET['check-address'])){
+            $address = $_GET['orther-place'];
+        }else{
+            $address = $_GET['address-detail'].",".$_GET['ward'].",".$_GET['district'].",".$_GET['city'];
+        }
+        $result = $paymentController->insertOrder($iduser,$idsps,$idtsps,$counts,$ship,$payment,
+        $name,$numberPhone,$email,$address);
     }
 ?>
 
@@ -34,7 +53,11 @@
 </head>
 <body>
 <div class="container">
-    <form action="">
+    <form action="index.php" method="get">
+        <input type="hidden" name="route" value="payment">
+        <?php
+            $paymentController->getData($iduser,$idsps,$idtsps,$counts);
+        ?>
         <div class="row">
             <div class="col">
                 <?php
@@ -55,10 +78,10 @@
                     <tr>
                         <td style="text-align: left">
                             <div class="inputBox" style="margin:0;">
-                                <label style="font-weight: 600;" for="1">shipping</label> <br>
-                                <input type="radio" name="1" id="" checked>
+                                <label style="font-weight: 600;">shipping</label> <br>
+                                <input type="radio" name="ship" id="" value="free" checked>
                                 <span>giao hàng miễn phí</span> <br>
-                                <input type="radio" name="1" id="">
+                                <input type="radio" name="ship" id="" value = "ht">
                                 <span>giao hàng hỏa tốc 50.000 đ</span> <br>
                                 <small>DNK Yellow Shoes x 1, Áo dài việt nam x 6, Anchor Bracelet x 1</small>
                             </div>
@@ -67,9 +90,9 @@
                     <tr>
                         <td style="text-align: left">
                             <div class="inputBox" style="margin: 0;">
-                                <input type="radio" name="3" id="" checked>
+                                <input type="radio" name="payment" id="" value="cash" checked>
                                 <span>Trả tiền mặt khi nhận hàng</span><br>
-                                <input type="radio" name="3" id="">
+                                <input type="radio" name="payment" id="" value="ck">
                                 <span>Chuyển khoản ngân hàng</span><br>
                             </div>
                         </td>
@@ -78,87 +101,9 @@
             </div>
         </div>
 
-        <input type="submit" value="Tiến hành kiểm tra" class="submit-btn">
+        <input type="submit" name="submit" value="Thanh toán" class="submit-btn">
     </form>
 </div>
-<script>
-        $(document).ready(function () {
-            // Sự kiện khi chọn tỉnh/thành phố
-            $('#province').change(function () {
-                // Lấy giá trị tỉnh/thành phố được chọn
-                var selectedProvince = $(this).find('option:selected').data('district');
-                var selectedDistrict = $('#district');
-                var selectedWard = $('#ward');
-                if(selectedProvince === 0){
-                    selectedDistrict.empty();
-                    selectedWard.empty();
-                    selectedDistrict.append("<option value='' data-district='0'>--Chọn quận huyện--</option>");
-                    selectedWard.append("<option value='' data-ward='0'>--Chọn phường/xã--</option>");
-                }
-                else{
-                    // Gửi yêu cầu Ajax để lấy danh sách quận/huyện của tỉnh/thành phố được chọn
-                    $.ajax({
-                        url: "https://provinces.open-api.vn/api/p/"+ selectedProvince +"?depth=2",
-                        method: "GET",
-                        success: function(data) {
-                            console.log(data);
-                            // Update the #district dropdown
-                            var districtDropdown = $("#district");
-                            districtDropdown.empty(); // Clear existing options
-                            districtDropdown.append("<option value='' data-ward='0'>--Chọn quận huyện--</option>");
-                            
-                            var wardDropdown = $("#ward");
-                            wardDropdown.empty(); // Clear existing options
-                            wardDropdown.append("<option value='' data-ward='0'>--Chọn phường/xã--</option>");
-                            // Populate options with districts
-                            $.each(data.districts, function(index, district) {
-                                districtDropdown.append("<option value='" + district.name + "' data-ward='" + district.code + "'>" + district.name + "</option>");
-                            });
-
-                            // Enable the #district dropdown
-                            districtDropdown.prop("disabled", false);
-                        },
-                        error: function() {
-                            console.log("Error fetching districts");
-                        }
-                    });
-                }
-            });
-
-            //Sự kiện khi chọn quận/huyện
-            $('#district').change(function () {
-                // Lấy giá trị quận/huyện được chọn
-                var selectedDistrict= $(this).find('option:selected').data('ward');
-                var selectedWard = $('#ward');
-                if(selectedDistrict === 0){
-                    selectedWard.empty();
-                    selectedWard.append("<option value='' data-ward='0'>--Chọn phường/xã--</option>");
-                }else{
-                    // Gửi yêu cầu Ajax để lấy danh sách quận/huyện của tỉnh/thành phố được chọn
-                    $.ajax({
-                        url: "https://provinces.open-api.vn/api/d/"+ selectedDistrict +"?depth=2",
-                        method: "GET",
-                        success: function(data) {
-                            console.log(data);
-                            // Update the #ward dropdown
-                            var wardDropdown = $("#ward");
-                            wardDropdown.empty(); // Clear existing options
-                            wardDropdown.append("<option value='' data-ward='0'>--Chọn phường/xã--</option>");
-                            // Populate options with wards
-                            $.each(data.wards, function(index, ward) {
-                                wardDropdown.append("<option value='" + ward.name + "'>" + ward.name + "</option>");
-                            });
-
-                            // Enable the #ward dropdown
-                            wardDropdown.prop("disabled", false);
-                        },
-                        error: function() {
-                            console.log("Error fetching wards");
-                        }
-                    });
-                }
-            });
-        });
-    </script>
+    <script src="user/assets/script/payment.js"></script>
 </body>
 </html>

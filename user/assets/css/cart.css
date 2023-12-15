@@ -161,3 +161,10 @@
     background-color: #fed295;
     font-weight: 600;
 }
+
+.box_buy .btn_buy{
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: var(--black);
+}

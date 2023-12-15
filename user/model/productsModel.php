@@ -27,14 +27,9 @@
         public function select($iddm,$start,$limit,$count){
             if(empty($iddm)){
                 $sql = "SELECT * FROM product LIMIT $start,$limit";
-            }else if($count > 0){
-                $sql = "SELECT * FROM product p 
-                JOIN pro_cate pc ON p.I_id_pro = pc.I_id_pro 
-                JOIN category c ON pc.I_id_category = c.I_id_category 
-                WHERE c.I_id_parent = ".$iddm." LIMIT $start, $limit";
             }else{
                 $sql = "SELECT * FROM product p 
-                JOIN pro_cate c ON p.I_id_pro = c.I_id_pro 
+                JOIN category c ON p.I_id_category = c.I_id_category 
                 WHERE c.I_id_category = ".$iddm." LIMIT $start, $limit";
             }
 
@@ -83,7 +78,7 @@
                 $sql = "SELECT COUNT(I_id_pro) as total FROM product";
             }else{
                 $sql = "SELECT COUNT(p.I_id_pro) as total FROM product p
-                JOIN pro_cate c ON p.I_id_pro = c.I_id_pro
+                JOIN category c ON p.I_id_category = c.I_id_category
                 WHERE c.I_id_category = $iddm";
             }
 

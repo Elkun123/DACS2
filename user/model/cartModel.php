@@ -55,8 +55,10 @@
                 ];
             }
 
-            $processedPairs = [];// Mảng để lưu trữ các cặp idsp-idtsp đã được xử lý
+            $processedPairs = [];
+            $string = "";// Mảng để lưu trữ các cặp idsp-idtsp đã được xử lý
             foreach ($idsps as $index => $id) {
+                $string .= $id; 
                 $idtspSub = [];
                 if($sign === "true"){
                     $select = "SELECT I_id_type_pro FROM product_type WHERE I_id_pro = $id";
@@ -130,11 +132,10 @@
 
                                     // // Thực hiện lệnh UPDATE
                                     $updateQuery = "UPDATE cart_pro SET I_qty = $newQty WHERE I_id_pro = $id AND I_id_cart = $idCart AND I_id_type_pro = $idtsp";
-                                    $updateResult = mysqli_query($this->conn, $updateQuery);
-                    
-                                    if (!$updateResult) {
-                                        return false; // Xử lý lỗi nếu có
-                                    }
+                                    // $updateResult = mysqli_query($this->conn, $updateQuery);
+                                    // if (!$updateResult) {
+                                    //     return false; // Xử lý lỗi nếu có
+                                    // }
                                 } else {
                                     // Nếu không tồn tại I_id_type_pro, thêm mới với giá trị qty bằng $count và idtsp
                                     $insertQuery = "INSERT INTO cart_pro (I_id_cart, I_id_pro, I_qty, I_id_type_pro) VALUES ($idCart, $id, $count, $idtsp)";
@@ -156,6 +157,7 @@
                         }
                     }
                 }
+                return $string;
             }
             return true;
         }        
@@ -165,6 +167,13 @@
             $sql = "DELETE FROM cart_pro WHERE I_id_cart = $idCart AND I_id_pro = $idsp AND I_id_type_pro = $idtsp";
             $result = mysqli_query($this->conn,$sql);
             return $result;
+        }
+
+        public function getIdUser($username){
+            $sql = "SELECT I_id_user FROM users WHERE T_user_name = '$username'";
+            $result = mysqli_query($this->conn,$sql);
+            $row = mysqli_fetch_array($result);
+            return $row['I_id_user'];
         }
     }
 ?>

@@ -27,11 +27,13 @@
 
         public function selectData($idsps,$qtys,$idCart){
             $result = $this->cart_sign->selectData($idCart);
+            $resultIdUser = $this->cart_sign->getIdUser($_SESSION['username']);
             $count = 0;
             if($result){
                 while($row_result = mysqli_fetch_array($result)){
                     echo '
-                        <div class="row show_item" data-idcart="'.$idCart.'" data-idsp="'.$row_result['I_id_pro'].'" data-idtsp="'.$row_result['I_id_type_pro'].'">
+                        <div class="row show_item" data-idcart="'.$idCart.'" data-idsp="'.$row_result['I_id_pro'].'" 
+                        data-idtsp="'.$row_result['I_id_type_pro'].'" data-iduser="'.$resultIdUser.'">
                             <div class="col-5 show_pro">
                                 <input type="checkbox" name="check" id="child_check" data-price="'.$row_result['I_price']*$qtys[$count].'">
                                 <img src="'.$row_result['T_image_sample_type_pro'].'" alt="ảnh sản phẩm">
@@ -96,7 +98,7 @@
         public function updateCart($idCart,$idsps,$counts,$sign,$idtsps){
             $result = $this->cart_sign->updateCart($idCart,$idsps,$counts,$sign,$idtsps);
             if($result){
-                return $msg = "success_cart";
+                return $msg = $result;
             }else{
                 return $msg = "fail_cart";
             }

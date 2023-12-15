@@ -193,7 +193,7 @@
                         <button type="button" class="increment">+</button>
                         <span>'.$row_type['I_qty_in_stock'].' sản phẩm có sẵn</span>
                         </div>
-                        <p class="sub-total">Tổng tiền : <span>'.$row['I_price'].'<i class="fa-solid fa-dong-sign"></i></span></p>
+                        <p class="sub-total">Tổng tiền : <span>'.$row_type['I_price'].'<i class="fa-solid fa-dong-sign"></i></span></p>
                         <a href="#" class="btn_buy" data-idsp="'.$idsp.'" data-idtsp="'.$row_type['I_id_type_pro'].'" 
                         data-iduser="'.$idUser.'"><i class="fa-solid fa-receipt"></i> Mua ngay</a>
                         <button type="submit" class="btn_add_cart"><i class="fas fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
